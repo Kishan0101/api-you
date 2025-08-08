@@ -316,8 +316,12 @@ app.get('/api/shorts', (req, res) => {
 
 
 app.use(cors({
-  origin: 'http://localhost:5173'
+  origin: 'http://localhost:5173', // Allow your Vite dev server
+  methods: ['GET', 'POST'], // Allow specific methods
+  credentials: true // If you need cookies or auth headers
 }));
+
+app.use('/generated_shorts', express.static(path.join(__dirname, 'generated_shorts')));
 
 // Start server
 const PORT = process.env.PORT || 3000;

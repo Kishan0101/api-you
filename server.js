@@ -243,7 +243,17 @@ class YouTubeShortGenerator {
 
 // Initialize Express app
 const app = express();
+
+// Enable CORS before other middleware and routes
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow your Vite dev server
+  methods: ['GET', 'POST'], // Allow specific methods
+  credentials: true // If you need cookies or auth headers
+}));
+
 app.use(express.json());
+app.use('/generated_shorts', express.static(path.join(__dirname, 'generated_shorts')));
+
 const generator = new YouTubeShortGenerator();
 
 // Load face-api.js models
@@ -313,15 +323,6 @@ app.get('/api/shorts', (req, res) => {
     }));
     res.json(jobs);
 });
-
-
-app.use(cors({
-  origin: 'http://localhost:5173', // Allow your Vite dev server
-  methods: ['GET', 'POST'], // Allow specific methods
-  credentials: true // If you need cookies or auth headers
-}));
-
-app.use('/generated_shorts', express.static(path.join(__dirname, 'generated_shorts')));
 
 // Start server
 const PORT = process.env.PORT || 3000;

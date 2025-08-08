@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const youtubedl = require('youtube-dl-exec');
 const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs').promises;
@@ -312,6 +313,11 @@ app.get('/api/shorts', (req, res) => {
     }));
     res.json(jobs);
 });
+
+
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
 
 // Start server
 const PORT = process.env.PORT || 3000;

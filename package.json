@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "canvas": "^3.1.2",
+    "cors": "^2.8.5",
     "deepspeech": "^0.9.3",
     "express": "^5.1.0",
     "face-api.js": "^0.22.2",
